@@ -11,6 +11,7 @@ try:
 except ImportError:
     from pdb import set_trace
 
+# TODO: change it to accurate specification
 class CreateText(metaclass=ABCMeta):
 
     @abstractmethod

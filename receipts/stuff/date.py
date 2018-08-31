@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
 """
 """
-import argparse
 import os
 import sys
-from abc import abstractmethod, ABCMeta
-from pathlib import Path
-try:
-    from bpdb import set_trace
-except ImportError:
-    from pdb import set_trace
+
+import mimesis
 
 from receipts.stuff.base import CreateText
 
@@ -20,10 +15,19 @@ class Date(CreateText):
         self.locale = locale
 
     def __call__(self):
-        pass
+        datetime = self.datetime()
 
-    def _create(self):
-        pass
+    def datetime(self):
+        dt = mimesis.Datetime('ja')
+        return dt.datetime()
+
+    def parse_to_jp_datetime(self, datetime):
+        parsed_datetime = '{}年{}月{}日'.format(
+                datetime.year,
+                datetime.month,
+                datetime.day
+                )
+        return parsed_datetime
 
 
 if __name__ == '__main__':
